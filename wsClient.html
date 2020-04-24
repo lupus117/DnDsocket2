@@ -3,6 +3,7 @@
 <head>
     <style type="css">
         .body {background-color: grey;}
+        
     </style>
     <meta charset="utf-8" lang="eng">
     <title>DnD client by lupus</title>
@@ -26,16 +27,16 @@
                     tmpurl = 'ws://localhost:8080';
                 }
                 const connection = new ws(tmpurl);
-                
-                   connected = true;
-                    document.getElementById('ws-url').remove()
-                    document.getElementById('connectToServerButton').innerText="Refresh page"
+
+                connected = true;
+                document.getElementById('ws-url').remove()
+                document.getElementById('connectToServerButton').innerText = "Refresh page"
 
                 connection.onopen = () => {
-                 
-                    
+
+
                 }
-                
+
                 connection.onerror = (error) => {
                     outPut(`WebSocket error: ${error}`);
 
@@ -75,7 +76,7 @@
                     };
                 });
             }
-            else{
+            else {
                 location = location;
             }
 
@@ -89,16 +90,16 @@
     </script>
 </head>
 
-<body style="background: grey">
-    <input id="ws-url" type="text" style="align-self: center; width:500px;" placeholder="url for server here">
-    <button id="connectToServerButton" onclick="initiateWsConnection()"> connect to server</button>
-    <br>
-    <p id="output" readonly
-        style="background: grey;width:100%;height:700px;line-height:1em;overflow-y:scroll;padding:5px;scroll-behavior: auto;">
+<body style="background: grey; height:100%;" >
+    <input id="ws-url" type="text"  style="align-self: center; width:500px; border-radius: 15px;" placeholder="url for server here">
+    <button id="connectToServerButton" style="border-radius: 15px;" onclick="initiateWsConnection()"> connect to server</button>
+    <br><div >
+    
+    <p id="output" readonly style="background: grey;width:100%;height:90%;line-height:1em;overflow-y:scroll;padding:5px; scroll-behavior: auto; font: Serif">
 
     </p>
-    <input id="txtInput" type="text" style="align-self: center; width:100%;" placeholder="input">
-
+    <input id="txtInput" type="text" style="align-self: center; position: fixed; bottom: 5px;  width:100%; " placeholder="input">
+</div>
 </body>
 
 </html>
