@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<head>
+    <style type="css">
+        .body {background-color: grey;}
+    </style>
+    <meta charset="utf-8" lang="eng">
+    <title>DnD client by lupus</title>
+
+    <script>
+
+        //const url = 'ws://ec2-54-197-7-155.compute-1.amazonaws.com:8080';
+        const ws = WebSocket;
+        var connected = false;
+        function outPut(string) {
+
+            output = document.getElementById('output');
+            output.innerText += `\n${string}`;
+            output.scrollTop = output.scrollHeight;
+        }
+        function initiateWsConnection() {
+
+            if (!connected) {
+                var tmpurl = document.getElementById('ws-url').value
+                if (tmpurl == '') {
+                    tmpurl = 'ws://localhost:8080';
+                }
+                const connection = new ws(tmpurl);
+                
+                   connected = true;
+                    document.getElementById('ws-url').remove()
+                    document.getElementById('connectToServerButton').innerText="Refresh page"
+
+                connection.onopen = () => {
+                 
+                    
+                }
+                
+                connection.onerror = (error) => {
+                    outPut(`WebSocket error: ${error}`);
+
+                    console.log(`WebSocket error: ${error}`);
+                }
+
+                connection.onmessage = (e) => {
+                    outPut(e.data);
+                    console.log(e.data);
+                }
+
+                connection.onclose = function (event) {
+                    console.log('connection lost');
+                    outPut('connection closed');
+                    document.getElementById('txtInput').remove()
+
+
+                };
+
+
+                // Execute a function when the user releases a key on the keyboard
+                document.addEventListener("keyup", function (event) {
+                    // Number 13 is the "Enter" key on the keyboard
+                    if (event.keyCode === 13 && connected) {
+                        var input = document.getElementById('txtInput').value;
+                        // Cancel the default action, if needed
+                        console.log(input)
+
+                        if (input != "" && connection.OPEN) {
+
+
+                            connection.send(input.toString());
+                            document.getElementById('txtInput').value = '';
+                        }
+                        // Trigger the button element with a click
+                        event.preventDefault();
+                    };
+                });
+            }
+            else{
+                location = location;
+            }
+
+
+
+
+        }
+
+
+
+    </script>
+</head>
+
+<body style="background: grey">
+    <input id="ws-url" type="text" style="align-self: center; width:500px;" placeholder="url for server here">
+    <button id="connectToServerButton" onclick="initiateWsConnection()"> connect to server</button>
+    <br>
+    <p id="output" readonly
+        style="background: grey;width:100%;height:700px;line-height:1em;overflow-y:scroll;padding:5px;scroll-behavior: auto;">
+
+    </p>
+    <input id="txtInput" type="text" style="align-self: center; width:100%;" placeholder="input">
+
+</body>
+
+</html>
