@@ -1,0 +1,22 @@
+{
+  "name": "dndsocket2",
+  "version": "1.0.0",
+  "description": "The seckond dnd server/client prototype",
+  "main": "srv1.js",
+  "scripts": {
+    "test": "node srv1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lupus117/DnDsocket2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lupus117/DnDsocket2/issues"
+  },
+  "homepage": "https://github.com/lupus117/DnDsocket2#readme",
+  "dependencies": {
+    "ws": "^7.2.3"
+  }
+}
