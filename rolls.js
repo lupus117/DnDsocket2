@@ -10,17 +10,14 @@ function rollDieXtimes(number, DieSize) {
     }
     return results;
 }
+
 exports.searchAndRollDice = function (string) {
     var tmpstr = string;
     var regex = /\d+/g;
     var matches = tmpstr.match(regex);  // creates array from matches
     if (matches != null) {
+        //matches.forEach(a => {console.log(a)})
 
-
-        matches.forEach(element => {
-            console.log(element);
-
-        });
         for (i = 0; i < matches.length - 1; i++) {
             dice = `${matches[i]}d${matches[i + 1]}`;
             if (tmpstr.toLowerCase().includes(dice)) {
@@ -34,17 +31,37 @@ exports.searchAndRollDice = function (string) {
                     }
                     else resultstring += element;
                 });
-                tmpstr = tmpstr.toLowerCase().replace(dice, `|[${dice}=${resultstring}]${sum}|`)
-                console.log(`rolling: ${matches[i]}d${matches[i + 1]} = ${rollDieXtimes(matches[i], matches[i + 1])}`)
+                if (i < matches.length - 2 && tmpstr.toLowerCase().includes(`${dice}+${matches[i + 2]}`)) {
+                    sum += parseInt(matches[i + 2], 10);
+                    dice = `${dice}+${matches[i + 2]}`;
+                }
+                if (i < matches.length - 2 && tmpstr.toLowerCase().includes(`${dice}-${matches[i + 2]}`)) {
+                    sum -= parseInt(matches[i + 2], 10);
+                    dice = `${dice}-${matches[i + 2]}`;
+
+                }
+                if (i < matches.length - 2 && tmpstr.toLowerCase().includes(`${dice}*${matches[i + 2]}`)) {
+                    sum *= matches[i + 2];
+                    dice = `${dice}*${matches[i + 2]}`;
+
+                }
+                if (i < matches.length - 2 && tmpstr.toLowerCase().includes(`${dice}/${matches[i + 2]}`)) {
+                    sum /= matches[i + 2];
+                    dice = `${dice}/${matches[i + 2]}`;
+
+                }
+                tmpstr = tmpstr.toLowerCase().replace(dice, `${sum}(${dice}=${resultstring})`)
+                //console.log(`rolling: ${matches[i]}d${matches[i + 1]} = ${rollDieXtimes(matches[i], matches[i + 1])}`)
 
             }
         }
-        console.log("rolled:" + tmpstr);
+        //console.log("rolled:" + tmpstr);
     }
 
     return tmpstr;
 }
-//console.log(rollDie(2));
+
+////console.log(rollDie(2));
 /*rollDieXtimes(5,20).forEach(die => {
-    console.log(`${die}`)
+    //console.log(`${die}`)
 });*/

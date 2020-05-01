@@ -6,7 +6,7 @@ Connections = [];
 var ConnectionNames = []
 var stdin = process.openStdin();
 
-
+console.log('server initiated')
 wss.on('connection', Server => {
  
  //Add the made collection to the array
@@ -45,8 +45,9 @@ wss.on('connection', Server => {
 
 //reads terminal input
 stdin.addListener("data", function(d) {
-  
-    sendToAll(rolls.searchAndRollDice("dm: "+d.toString().trim()));
+  str =rolls.searchAndRollDice("dm: "+d.toString().trim())
+    sendToAll(str);
+    console.log(str);
     
 });
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <head>
+    <script type="JavaScript" src="./htmlsrv.js"></script>
     <style type="css">
         .body {background-color: grey;}
         
@@ -8,7 +9,7 @@
     <meta charset="utf-8" lang="eng">
     <title>DnD client by lupus</title>
 
-    <script>
+   <!-- <script>
 
         //const url = 'ws://ec2-54-197-7-155.compute-1.amazonaws.com:8080';
         const ws = WebSocket;
@@ -87,12 +88,11 @@
 
 
 
-    </script>
+    </script>-->
 </head>
 
 <body style="background: grey; height:100%;" >
-    <input id="ws-url" type="text"  style="align-self: center; width:500px; border-radius: 15px;" placeholder="url for server here">
-    <button id="connectToServerButton" style="border-radius: 15px;" onclick="initiateWsConnection()"> connect to server</button>
+    <button id="startServer" style="border-radius: 15px;" onclick="initate()"> Start Server</button>
     <br><div >
     
     <p id="output" readonly style="background: grey;width:100%;height:500px;line-height:1em;overflow-y:scroll;padding:5px; scroll-behavior: auto; font: Serif">
